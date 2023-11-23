@@ -8,6 +8,7 @@ app.use(express.urlencoded({extended:false}))
 app.get('/', Controller.reg)
 app.get('/login', Controller.login)
 app.get('/home', Controller.home)
+app.get('/formadd', Controller.formAdd)
 
 
 app.listen(port, () => {

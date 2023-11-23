@@ -24,6 +24,14 @@ class Controller{
             res.send(error)
         }
     }
+    static async formAdd(req,res){
+        try{
+            res.render('formadd')
+        }catch(error){
+            console.log(error)
+            res.send(error)
+        }
+    }
 
 }
 
