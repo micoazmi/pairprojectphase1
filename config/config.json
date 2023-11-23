@@ -1,5 +1,6 @@
 {
   "development": {
+    "multipleStatements"  : true,
     "username": "postgres",
     "password": 1234,
     "database": "pair",

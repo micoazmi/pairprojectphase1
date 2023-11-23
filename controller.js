@@ -1,7 +1,7 @@
 const {User,Product}=require('./models')
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
-const verify = require('./verify');
+const { Op } = require("sequelize");
 
 class Controller{
     static async reg(req,res){
@@ -40,6 +40,7 @@ class Controller{
     static async handleLogin(req,res){
         try {
             const user = await User.findOne({ where : {email : req.body.email }});
+            // console.log(user);
             if(user){
             const password_valid = await bcrypt.compare(req.body.password,user.password);
             if(password_valid){
@@ -59,7 +60,16 @@ class Controller{
     }
     static async home(req,res){
         try {
-            let data=await Product.findAll()
+            let {search}=req.query
+            let options={}
+            if(search){
+                options.where={
+                    name:{
+                        [Op.iLike]: `%${search}%` 
+                    }
+                }
+            }
+            let data=await Product.findAll(options)
             // console.log(data);
             res.render('home',{data})
         } catch (error) {
@@ -74,6 +84,21 @@ class Controller{
         } catch (error) {
             console.log(error);
             res.send(error)
+        }
+    }
+    static async handlerAdd(req,res){
+        try {
+            let{name,price,image,description}=req.body
+            await Product.create({name,price,image,description})
+            res.redirect('/home')
+        } catch (error) {
+            if(error.name === 'SequelizeValidationError'){
+                let err = error.errors.map( el => el.message )
+                res.send(err)
+            }else{
+                console.log(error);
+                res.send(error)
+            }    
         }
     }
 
