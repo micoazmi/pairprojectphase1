@@ -9,7 +9,8 @@ const fs = require('fs');
 class Controller{
     static async reg(req,res){
         try {
-            res.render('register',{   url : 'http://localhost:3000/'})
+            let {error} = req.query
+            res.render('register',{error })
         } catch (error) {
             console.log(error);
             res.send(error)
@@ -27,8 +28,13 @@ class Controller{
            
             res.redirect('/login')
         } catch (error) {
-            console.log(error);
-            res.send(error)
+            if(error.name === 'SequelizeValidationError'){
+                let err = error.errors.map( el => el.message )
+                res.redirect(`/?error=${err}`)
+            }else{
+                console.log(error);
+                res.send(error)
+            }    
         }
     }
     static async login(req,res){

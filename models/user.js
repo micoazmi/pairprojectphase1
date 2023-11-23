@@ -37,18 +37,17 @@ module.exports = (sequelize, DataTypes) => {
     },
     password: {type:DataTypes.STRING,
       allowNull: false,
-    validate:{
-      notNull: {
-        msg: 'Please enter password'
-      },
-      notEmpty: {
-        msg: 'Please enter password'
-      },
-      min:{
-        args:8,
-        msg:'Password minimal 8'
-      }
-    }
+      validate:{
+        notNull: {
+          msg: 'Please enter password'
+        },
+        notEmpty: {
+          msg: 'Please enter password',
+        min:{
+          args:8,
+          msg:'Password minimal 8'
+        }
+        }}
     },
     role: DataTypes.STRING
   }, {
