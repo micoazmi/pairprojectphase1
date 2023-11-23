@@ -87,9 +87,9 @@
                                                 <a href="/home/cart/delete/<%= el.id %>" class="btn btn-primary"><i class="fa fa-trash-o"></i></a>
                                             </div>
                                             </td>
-                                            <td><%= el.price %></td>
+                                            <td><%= formatRp(el.price) %></td>
                                             <% totalprice+=el.price %>
-                                            <td><%= totalprice %></td>
+                                            <td><%= formatRp(totalprice) %></td>
                                         </tr>
                                        
                                       <% }) %>
@@ -99,12 +99,12 @@
                                         </tr>
                                         <tr>
                                             <td colspan="4" class="text-right">Total Product</td>
-                                            <td><%= totalprice %></td>
+                                            <td><%= formatRp(totalprice) %></td>
                                         </tr>
                                       
                                         <tr>
                                             <td colspan="4" class="text-right"><strong>Total</strong></td>
-                                            <td><%= totalprice %></td>
+                                            <td><%= formatRp(totalprice) %></td>
                                         </tr>
                                     </tbody>
                                 </table>

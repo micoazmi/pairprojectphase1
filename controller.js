@@ -144,7 +144,7 @@ class Controller{
     static async tampilcart(req,res){
         try {
             let data = await Order.findAll()
-            res.render('cart',{data})
+            res.render('cart',{data,formatRp})
 
         } catch (error) {
             console.log(error);
