@@ -1,0 +1,89 @@
+npm init -y
+npm i pg express ejs sequelize
+
+touch .gitignore
+
+npm i -D sequelize-cli
+
+npx sequelize init
+    di config > config.json diganti development nya ; host 127.0.0.1 = localhost
+
+npx sequelize db:create
+
+model = class
+
+npx sequelize model:create --name Person(single) --attributes name:string,age:integer,heightMe:float,weight:float,address:text,married:boolean (spasi pengaruh)
+
+npx sequelize db:migrate
+    (sequelizeMeta di dbeaver sebagai log)
+
+npx sequelize db:migrate:undo
+
+<==CUSTOM MIGRATION==>
+-rename column
+-menambah column
+-menghapus column
+======================
+    npx sequelize migration:create
+
+        a. npx sequelize migration:create --name rename-heightMe-to-height
+
+        b. npx sequelize migration:create --name create-column-gender
+
+     
+      npx sequelize db:migrate
+
+   !!! SETIAP MIGRATION TAMBAHAN jgn lupa UPDATE DI MODEL(manual)
+
+level database, MIGRATION, SEEDERS(yang awal nama file ada angka nya)
+level aplikasi, MODEL
+
+npx sequelize seed:create --name seed-People
+    npx sequelize db:seed:all
+    npx sequelize db:seed --seed (file seed)
+  
+/////// _______________________ ///////////
+
+migration
+foreign key
+
+  + references :
+
+  npx sequelize db:migrate
+
+
+include = left outer join; require: true = inner join
+attributes = array
+
+helpers > helper.js
+
+- npm init -y
+- npm i pg express ejs
+- buat .gitignore isi dengan node_modules
+- buat database di dbeaver sesuai permintaan soal
+- config.js (koneksi): https://node-postgres.com/features/connecting (bagian yg programmatic)
+- setup.js (buat tabel): https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-create-table/
+- seed.js (insert data ke tabel) : 
+    - https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert/ (id tidak boleh di-seed)
+    - fs : https://nodejs.org/api/fs.html#fsreadfilesyncpath-options
+- app.js :
+    - setup express : https://expressjs.com/en/starter/hello-world.html
+    - view engine : https://expressjs.com/en/guide/using-template-engines.html
+    - bodyparser : https://www.geeksforgeeks.org/express-js-express-urlencoded-function/
+    - route : https://expressjs.com/en/starter/basic-routing.html
+- MVC
+    - Controller memiliki static method yg punya 2 parameter yaitu request dan respond. Isi staticnya memanggil Model atau menerima request & mengirim respond
+        - Request params harus di daftarkan menggunakan : di route
+        - Request query menumpang di path menggunakan ?
+        - Request body didapat dari form
+        - Respond send untuk mengirim data
+        - Respond render parameter pertama nama file, parameter kedua  berupa object yg berisi data yg akan dikirim
+        - Respond redirect parameternya berisi path / url, tidak bisa membawa data kecuali lewat query url
+    - Model melakukan proses query dan mengirim data ke controller
+    - View berisi file-file ejs : https://ejs.co/#docs
+
+https://stackoverflow.com/questions/149055/how-to-format-numbers-as-currency-strings
+
+https://stackoverflow.com/questions/69783211/sequelize-how-do-you-format-date-to-yyyy-mm-dd-hhmmss-and-keep-the-columns-as
+
+req.body=create, params=edit, query=search
