@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Cart </title>
+    <%- include('bootstrap') %>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/home"> ECOMMERCE </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/home"> Home </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"> Cart </a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Category 
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/home/add"> Add Product</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+              </li>
+            </ul>
+            <form class="d-flex"  action="" method="get">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+        <div class="btn-group" role="group" aria-label="Basic outlined example">
+            <button type="button" class="btn btn-outline-primary"> Login </button>
+            <button type="button" class="btn btn-outline-primary"> Logout </button>
+          </div>
+      </nav>
+
+      <p> </p>
+
+        <div class="container-fluid">
+            <div class="col-md-9 col-sm-8 content">
+                <div class="row">
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-info panel-shadow">
+                            <div class="panel-heading">
+                                <h3>
+                                    <img class="img-circle img-thumbnail"> Nama Customer
+                                </h3>
+                            </div>
+                            <div class="panel-body"> 
+                                <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Description</th>
+                                        <th>Qty</th>
+                                        <th>Price</th>
+                                        <th>Total</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><img style="width: 18rem;" src="https://radarlampung.disway.id/upload/98973c13f2ba9e2933ef4c3107baf3a3.jpg" class="img-cart"></td>
+                                            <td><strong>Product 1</strong><p>Size : 26</p></td>
+                                            <td>
+                                            <form class="form-inline">
+                                                <input class="form-control" type="text" value="1">
+                                                <button rel="tooltip" class="btn btn-default"><i class="fa fa-pencil"></i></button>
+                                                <a href="#" class="btn btn-primary"><i class="fa fa-trash-o"></i></a>
+                                            </form>
+                                            </td>
+                                            <td>$54.00</td>
+                                            <td>$54.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td><img style="width: 18rem;" src="https://www.bootdey.com/image/400x200/87CEFA/000000" class="img-cart"></td>
+                                            <td><strong>Product 2</strong><p>Size : M</p></td>
+                                            <td>
+                                            <form class="form-inline">
+                                                <input class="form-control" type="text" value="2">
+                                                <button class="btn btn-default" ><i class="fa fa-pencil"></i></button>
+                                                <a href="#" class="btn btn-primary" rel="tooltip" ><i class="fa fa-trash-o"></i></a>
+                                            </form>
+                                            </td>
+                                            <td>$16.00</td>
+                                            <td>$32.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" class="text-right">Total Product</td>
+                                            <td>$86.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" class="text-right">Total Shipping</td>
+                                            <td>$2.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" class="text-right"><strong>Total</strong></td>
+                                            <td>$88.00</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        </div>
+                        <a href="#" class="btn btn-success"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Continue Shopping</a>
+                        <a href="#" class="btn btn-primary pull-right">Next<span class="glyphicon glyphicon-chevron-right"></span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+</body>
+</html>

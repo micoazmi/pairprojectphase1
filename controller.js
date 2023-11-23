@@ -101,6 +101,16 @@ class Controller{
             }    
         }
     }
+    static async cart(req,res){
+        try {
+       
+            res.render('cart')
+
+        } catch (error) {
+            console.log(error);
+            res.send(error)
+        }
+    }
 
 }
 
