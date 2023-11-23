@@ -11,7 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Product.hasOne(models.discount,{foreignKey:"productId"})
     }
+  
   }
   Product.init({
     name: {
@@ -71,7 +73,14 @@ module.exports = (sequelize, DataTypes) => {
       } 
     }
 
-  }, {
+  },{
+    hooks: {
+      beforeCreate: (prod, options) => {
+       if(prod.price>=2000000){
+        prod.price=(prod.price-(prod.price*30/100))
+       }
+      }
+    },
     sequelize,
     modelName: 'Product',
   });

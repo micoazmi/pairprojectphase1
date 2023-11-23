@@ -1,7 +1,6 @@
 {
   "name": "pair-project-phase-1",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "dependencies": {
     "abbrev": "^2.0.0",
@@ -39,6 +38,7 @@
     "destroy": "^1.2.0",
     "dottie": "^2.0.6",
     "eastasianwidth": "^0.2.0",
+    "easyinvoice": "^3.0.25",
     "editorconfig": "^1.0.4",
     "ee-first": "^1.1.1",
     "ejs": "^3.1.9",
@@ -76,6 +76,7 @@
     "inflection": "^1.13.4",
     "inherits": "^2.0.4",
     "ini": "^1.3.8",
+    "invoice": "^0.0.1",
     "ipaddr.js": "^1.9.1",
     "is-core-module": "^2.13.1",
     "is-fullwidth-code-point": "^3.0.0",
@@ -184,5 +185,6 @@
   "license": "ISC",
   "devDependencies": {
     "sequelize-cli": "^6.6.2"
-  }
+  },
+  "description": ""
 }

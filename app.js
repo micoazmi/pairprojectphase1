@@ -19,6 +19,14 @@ app.get('/home',Controller.home,verify.isLogin)
 app.get('/home/add',Controller.add,verify.isLogin)
 app.post('/home/add',Controller.handlerAdd,verify.isLogin)
 
+
+app.get('/home/cart/:id', Controller.cart,verify.isLogin)
+app.get('/home/cart', Controller.tampilcart,verify.isLogin)
+app.get('/home/cart/delete/:id', Controller.delete,verify.isLogin)
+app.get('/checkout', Controller.checkout,verify.isLogin)
+
+
+
 app.get('/logout',Controller.logout,verify.isLogout)
 
 

@@ -1,9 +1,10 @@
-const {User,Product}=require('./models')
+const {User,Product,discount,Order}=require('./models')
 const bcrypt = require("bcrypt");
-const jwt = require('jsonwebtoken');
 const { Op } = require("sequelize");
-const verify = require('./verify');
 const formatRp = require('./helper');
+const easyinvoice = require('easyinvoice');
+const fs = require('fs');
+
 
 class Controller{
     static async reg(req,res){
@@ -70,7 +71,9 @@ class Controller{
     static async home(req,res){
         try {
             let {search}=req.query
-            let options={}
+            let options={
+                include:discount
+            }
             if(search){
                 options.where={
                     name:{
@@ -78,9 +81,12 @@ class Controller{
                     }
                 }
             }
+            options.order=[['price','DESC']]
             let data=await Product.findAll(options)
+            let data3=await discount.findAll()
+
             // console.log(data);
-            res.render('home',{data,formatRp})
+            res.render('home',{data,formatRp,data3})
         } catch (error) {
             console.log(error);
             res.send(error)
@@ -98,7 +104,7 @@ class Controller{
     static async handlerAdd(req,res){
         try {
             let{name,price,image,description}=req.body
-            await Product.create({name,price,image,description})
+           await Product.create({name,price,image,description})
             res.redirect('/home')
         } catch (error) {
             if(error.name === 'SequelizeValidationError'){
@@ -123,6 +129,83 @@ class Controller{
             
         }
     }
+    static async cart(req,res){
+        try {
+            let{id}=req.params
+            let product = await Product.findByPk(id);
+            await Order.create({name:product.name,price:product.price,image:product.image,description:product.description})
+            res.redirect('/home')
+
+        } catch (error) {
+            console.log(error);
+            res.send(error)
+        }
+    }
+    static async tampilcart(req,res){
+        try {
+            let data = await Order.findAll()
+            res.render('cart',{data})
+
+        } catch (error) {
+            console.log(error);
+            res.send(error)
+        }
+    }
+    static async delete(req,res){
+        try {
+            
+            let{id}=req.params
+            console.log(id);
+            const result = await Order.destroy({
+                where: {
+                    id: id
+                }
+            });
+    
+            if (result === 0) {
+                return res.status(404).send('Order not found');
+            }
+         res.redirect('/home/cart')
+
+        } catch (error) {
+            console.log(error);
+            res.send(error)
+        }
+    }
+
+    static async checkout(req,res){
+        try {
+            const orders = await Order.findAll();
+            const invoiceData = {
+                documentTitle: 'Invoice',
+                currency: 'USD', // Change this to your preferred currency
+                taxNotation: 'vat', // Specify tax notation if applicable
+                products: orders.map(order => ({
+                    quantity: 1, // You can adjust the quantity based on your needs
+                    description: `${order.name} - ${order.description}`,
+                    price: order.price
+                }))
+            };
+    
+            // Create the invoice as a buffer
+            const result = await easyinvoice.createInvoice(invoiceData);
+            const pdfBuffer = Buffer.from(result.pdf, 'base64'); // Convert the base64 string to a Buffer
+    
+            // Set the response headers for download
+            res.setHeader('Content-Disposition', 'attachment; filename="invoice.pdf"');
+            res.setHeader('Content-Type', 'application/pdf');
+    
+            // Send the PDF buffer as the response
+            res.end(pdfBuffer);
+            
+         
+
+        } catch (error) {
+            console.log(error);
+            res.send(error)
+        }
+    }
+   
 
 }
 

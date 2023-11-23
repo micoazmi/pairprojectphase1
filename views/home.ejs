@@ -19,7 +19,7 @@
                 <a class="nav-link active" aria-current="page" href="#"> Home </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#"> Cart </a>
+                <a class="nav-link" href="/home/cart"> Cart </a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -51,17 +51,21 @@
 
       <div class="row">      
           <% data.forEach(el => { %>
+           
                     <div class="column">                 
                         <div class="container-fluid  " style="padding-left:50px;">
                             <div class="card" style="width: 18rem;">
-                            <img src="<%= el.image %>" class="card-img-top" alt="...">
+                            <img src="<%= el.image %>"  name="image"class="card-img-top" alt="...">
                             <div class="card-body">
-                                <h5 class="card-title"> <%= el.name %> </h5>
-                                <p class="card-text"> Description: <%= el.description %></p>
+                                <h5 class="card-title" name="name"> <%= el.name %> </h5>
+                                <p class="card-text" name="description"> Description: <%= el.description %></p>
                             </div>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Price: <%= formatRp(el.price) %> </li>
-                                <li class="list-group-item"> Discount </li>
+                                <li class="list-group-item" name="price">Price: <%= formatRp(el.price) %> </li>
+                                <li class="list-group-item"> Discount <% if (el.discount) { %>
+                
+                                 <%= el.discount.percentage %>
+                                <% } %></li>
                                 <li class="list-group-item"> Share </li>
                             </ul>
                             <div class="card-body">
