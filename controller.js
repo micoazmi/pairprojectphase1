@@ -16,6 +16,14 @@ class Controller{
             res.send(error)
         }
     }
+    static async home(req,res){
+        try{
+            res.render('home')
+        }catch(error){
+            console.log(error)
+            res.send(error)
+        }
+    }
 
 }
 

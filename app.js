@@ -7,6 +7,7 @@ app.set('view engine','ejs')
 app.use(express.urlencoded({extended:false}))
 app.get('/', Controller.reg)
 app.get('/login', Controller.login)
+app.get('/home', Controller.home)
 
 
 app.listen(port, () => {
