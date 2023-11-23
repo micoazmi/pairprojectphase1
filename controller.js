@@ -79,8 +79,8 @@ class Controller{
     }
     static async add(req,res){
         try {
-   
-            res.render('formAdd')
+            let {error} = req.query
+            res.render('formAdd', {error})
         } catch (error) {
             console.log(error);
             res.send(error)
@@ -94,7 +94,7 @@ class Controller{
         } catch (error) {
             if(error.name === 'SequelizeValidationError'){
                 let err = error.errors.map( el => el.message )
-                res.send(err)
+                res.redirect(`/home/add?error=${err}`)
             }else{
                 console.log(error);
                 res.send(error)
