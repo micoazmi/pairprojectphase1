@@ -2,11 +2,13 @@ const {User,Product}=require('./models')
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 const { Op } = require("sequelize");
+const verify = require('./verify');
+const formatRp = require('./helper');
 
 class Controller{
     static async reg(req,res){
         try {
-            res.render('register')
+            res.render('register',{   url : 'http://localhost:3000/'})
         } catch (error) {
             console.log(error);
             res.send(error)
@@ -31,8 +33,9 @@ class Controller{
     static async login(req,res){
         try {
        
-            res.render('login')
+            res.render('login',{   url : 'http://localhost:3000/'})
         } catch (error) {
+            
             console.log(error);
             res.send(error)
         }
@@ -54,8 +57,14 @@ class Controller{
     }
    
         } catch (error) {
-            console.log(error);
-            res.send(error)
+            if(error.name === 'SequelizeValidationError'){
+                let err = error.errors.map( el => el.message )
+                res.redirect(`/home/add?error=${err}`)
+            }else{
+                console.log(error);
+                res.send(error)
+            }   
+
         }
     }
     static async home(req,res){
@@ -71,7 +80,7 @@ class Controller{
             }
             let data=await Product.findAll(options)
             // console.log(data);
-            res.render('home',{data})
+            res.render('home',{data,formatRp})
         } catch (error) {
             console.log(error);
             res.send(error)
@@ -79,8 +88,8 @@ class Controller{
     }
     static async add(req,res){
         try {
-   
-            res.render('formAdd')
+            let {error} = req.query
+            res.render('formAdd' ,{error})
         } catch (error) {
             console.log(error);
             res.send(error)
@@ -94,11 +103,24 @@ class Controller{
         } catch (error) {
             if(error.name === 'SequelizeValidationError'){
                 let err = error.errors.map( el => el.message )
-                res.send(err)
+                res.redirect(`/home/add?error=${err}`)
             }else{
                 console.log(error);
                 res.send(error)
             }    
+        }
+    }
+    static async logout(req,res){
+        try {
+          res.redirect('/login')
+            
+          
+          
+        } catch (error) {
+           
+                console.log(error);
+                res.send(error)
+            
         }
     }
 

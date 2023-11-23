@@ -36,13 +36,15 @@
                 <a class="nav-link active" aria-current="page" href="/home/add"> Add Product</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                <a class="nav-link text-secondary " href="/logout" aria-disabled="true">Log out</a>
               </li>
+           
             </ul>
             <form class="d-flex"  action="" method="get">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
               <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
+            
           </div>
         </div>
       </nav>
@@ -58,13 +60,15 @@
                                 <p class="card-text"> Description: <%= el.description %></p>
                             </div>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Price: <%= el.price %> </li>
+                                <li class="list-group-item">Price: <%= formatRp(el.price) %> </li>
                                 <li class="list-group-item"> Discount </li>
                                 <li class="list-group-item"> Share </li>
                             </ul>
                             <div class="card-body">
-                                <a href="#" class="card-link"> Add to Cart </a>
+                                <a href="/home/cart/<%= el.id %>" class="card-link"> Add to Cart </a>
                                 <a href="#" class="card-link"> Buy Now </a>
+                             
+                                 
                             </div>
                             </div>
                             </div>
