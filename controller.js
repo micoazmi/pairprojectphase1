@@ -2,6 +2,7 @@ const {User,Product}=require('./models')
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 const verify = require('./verify');
+const { log } = require('console');
 
 class Controller{
     static async reg(req,res){
@@ -24,8 +25,12 @@ class Controller{
            
             res.redirect('/login')
         } catch (error) {
-            console.log(error);
+            if(error.name === 'SequelizeValidationError'){
+                let err = error.errors.map( el => el.message )
+                res.send(err)
+            }else{
             res.send(error)
+            }
         }
     }
     static async login(req,res){
@@ -48,9 +53,9 @@ class Controller{
             res.status(400).json({ error : "Password Incorrect" });
             }
   
-    }else{
-    res.status(404).json({ error : "User does not exist" });
-    }
+            }else{
+            res.status(404).json({ error : "User does not exist" });
+            }
    
         } catch (error) {
             console.log(error);
@@ -71,12 +76,31 @@ class Controller{
         try {
    
             res.render('formAdd')
+
         } catch (error) {
-            console.log(error);
+            console.log(error)
             res.send(error)
         }
     }
 
+    static async handlerAdd(req,res){
+        try{
+            let { name, price, image, description } = req.body
+            await Product.create({name, price, image, description})
+
+            res.redirect('/home')
+
+        }catch (error){
+            
+            if(error.name === 'SequelizeValidationError'){
+                let err = error.errors.map( el => el.message )
+                res.send(err)
+            }else{
+                res.send(error)
+            }    
+        
+        }
+    }
 }
 
 module.exports=Controller

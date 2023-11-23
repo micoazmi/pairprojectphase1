@@ -17,6 +17,7 @@ app.post('/login', Controller.handleLogin,verify.isLogin)
 app.get('/home',Controller.home,verify.isLogin)
 
 app.get('/home/add',Controller.add,verify.isLogin)
+app.post('/home/add',Controller.add,verify.isLogin)
 
 
 
