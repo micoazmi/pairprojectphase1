@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Discount </title>
+    <%- include('bootstrap') %>
+</head>
+<body style="padding: 0px !important;">
+	<div class="container h-100">
+		<div class="row h-100 justify-content-center align-items-center">
+			<form action="/discount" method="POST" class="col-md-4 card">
+				
+				<h2>Discount Products</h2>
+				<div class="form-group">
+					<label>Amount:</label>
+					<input type="text" name="amount" class="form-control">
+				</div>
+				<div class="form-group">
+					<label>ProductId:</label>
+                    <select name="productId" id="" class=" form-control">
+                        <% data.forEach(el => { %>
+                            <option value="<%=el.id  %>"> <%= el.name %></option>
+                         
+                        <% }) %>
+                    </select>
+				</div>
+             
+                <button type="submit" class="btn btn-primary"> Add Discount </button>
+				
+		
+			
+
+			</form>
+		</div>  
+	</div>
+</body>
+</html>

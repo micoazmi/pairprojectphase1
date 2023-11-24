@@ -24,6 +24,9 @@ app.get('/home/cart/:id', Controller.cart,verify.isLogin)
 app.get('/home/cart', Controller.tampilcart,verify.isLogin)
 app.get('/home/cart/delete/:id', Controller.delete,verify.isLogin)
 app.get('/checkout', Controller.checkout,verify.isLogin)
+app.get('/discount', Controller.discount,verify.isLogin)
+app.post('/discount', Controller.handlediscount,verify.isLogin)
+
 
 
 

@@ -211,6 +211,25 @@ class Controller{
             res.send(error)
         }
     }
+    static async discount(req,res){
+        try {
+            let data = await Product.findAll()
+           res.render('discount',{data})
+        } catch (error) {
+            console.log(error);
+            res.send(error)
+        }
+    }
+    static async handlediscount(req,res){
+        try {
+            let{amount,productId}=req.body
+            await discount.create({amount,productId})
+           res.redirect('/home')
+        } catch (error) {
+            console.log(error);
+            res.send(error)
+        }
+    }
    
 
 }
